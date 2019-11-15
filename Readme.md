@@ -8,12 +8,15 @@ Compiles to native image.
 
 ## Requirements
 
-1. Java with graal, can be install with sdkman
+1. Java with Graal, can be install with sdkman (https://sdkman.io)
 2. Maven
 3. Docker
 4. Kubernetes
+5. Helm
 
-Following assumes using k8s on Docker for Mac (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
+Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). 
+
+Following instructinos assume using k8s on Docker for Mac/Windows (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
 By default ./mvnw clean install will also create docker image with Graal
 compiled binary inside, using provided Dockerfile. 
 
@@ -33,14 +36,14 @@ Service can be deployed using provided helm charts in k8s directory with
 ```
 helm install k8s/mongonaut
 ```
-This will deploy two instances of the service, mongodb, prometheus, grafana. It
+This will deploy two instances of the service, mongodb, prometheus, grafana and jaeger-all-in-one (for demo purpose). It
 will also configure grafana to use prometheus as datasource, and automatically
 add application dashboard to the grafana.
 Service is annotated for prometheus in helm charts, and will automatically be
 scraped by prometheus.
 
 After deploying helm chart, follow instructions printed by helm to obtain
-grafana admin password, and access grafana with browser.
+grafana admin password, and access grafana with browser. Follow the instructions in the Notes printed after helm chart is deployed.
 
 Alternatively after deploying service with helm command above, more instances
 can be started with jvm, using the following commands:
