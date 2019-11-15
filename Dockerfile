@@ -1,4 +1,4 @@
-FROM oracle/graalvm-ce as graalvm
+FROM oracle/graalvm-ce:19.2.1 as graalvm
 ARG JAR_FILE
 ARG BUILD_DIR
 ADD ${BUILD_DIR}/${JAR_FILE} /home/app/mongonaut.jar
@@ -17,6 +17,6 @@ RUN gu install native-image && \
 FROM frolvlad/alpine-glibc
 EXPOSE 8080
 COPY --from=graalvm /home/app/mongonaut .
-COPY --from=graalvm /opt/graalvm-ce-19.0.0/jre/lib/amd64/libsunec.so .
+COPY --from=graalvm /opt/graalvm-ce-19.2.1/jre/lib/amd64/libsunec.so .
 ENTRYPOINT ["./mongonaut"]
 
