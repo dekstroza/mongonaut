@@ -13,6 +13,7 @@ Compiles to native image.
 3. Docker
 4. Kubernetes
 5. Helm
+6. Gradle (the build is broken at the moment)
 
 Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). 
 
@@ -46,12 +47,13 @@ After deploying helm chart, follow instructions printed by helm to obtain
 grafana admin password, and access grafana with browser. Follow the instructions in the Notes printed after helm chart is deployed.
 
 Alternatively after deploying service with helm command above, more instances
-can be started with jvm, using the following commands:
+can be started with "normal" jvm for comparision examples, using the following commands:
 ```
 # Expose mongodb on loadbalancer
 SERVICE_NAME=$(kubectl get svc | grep mongodb | awk '{print $1}'); kubectl expose svc $SERVICE_NAME --name $SERVICE_NAME-balanced --type LoadBalancer --port 27017 --target-port 27017
 java -jar target/mongonaut-1.0.0-SNAPSHOT.jar
 ```
+This can be usefull to compare startup times, and pre and post jvm warmup performance differences.
 
 ### Some common commands:
 
@@ -92,4 +94,10 @@ curl -w "@curl-format.txt" -o /dev/null -s -X POST localhost:7777/mongonaut/alar
 # Save several alarms
 for i in {10..20}; do curl -X POST localhost:7777/mongonaut/alarms -d "{\"id\": $i,\"name\": \"Second Alarm\", \"severity\": \"MEDIUM\"}" -H 'Content-Type:application/json'; done
 ```
+Grafana is available on http://localhost:876/ username is admin and password can be obtained using:
+```
+kubectl get secret --namespace default precise-ragdoll-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+Jaeger UI is on: localhost:80
 
+Happy hacking...
