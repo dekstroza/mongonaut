@@ -37,7 +37,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micronaut:micronaut-bom:1.1.0'
+        mavenBom 'io.micronaut:micronaut-bom:1.2.2'
     }
 }
 
@@ -59,15 +59,16 @@ dependencies {
     compile group: 'io.micronaut.configuration', name: 'micronaut-micrometer-registry-prometheus'
     compile group: 'io.swagger.core.v3', name: 'swagger-annotations'
     compile group: 'io.micronaut', name: 'micronaut-tracing'
-    compile group: 'io.jaegertracing', name: 'jaeger-thrift'
+    compile group: 'io.jaegertracing', name: 'jaeger-thrift', version: '1.0.0'
     runtime group: 'ch.qos.logback', name: 'logback-classic', version:'1.2.3'
     runtime group: 'io.micronaut', name: 'micronaut-graal'
-    runtime group: 'org.graalvm.sdk', name: 'graal-sdk', version: '1.0.0-rc16'
-    runtime group: 'com.oracle.substratevm', name: 'svm', version: '1.0.0-rc16'
+    compileOnly group: 'org.graalvm.sdk', name: 'graal-sdk', version: '19.2.1'
+    compileOnly group: 'com.oracle.substratevm', name: 'svm', version: '19.2.1'
     compileOnly group: 'io.micronaut', name: 'micronaut-inject-java'
-    testCompile "org.junit.jupiter:junit-jupiter-api"
+    testRuntimeOnly group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
     testCompile "io.micronaut.test:micronaut-test-junit5"
-    testRuntime "org.junit.jupiter:junit-jupiter-engine"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
 
 }
 buildscript {
@@ -86,6 +87,9 @@ buildscript {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')

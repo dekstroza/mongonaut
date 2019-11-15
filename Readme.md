@@ -9,11 +9,11 @@ Compiles to native image.
 ## Requirements
 
 1. Java with Graal, can be install with sdkman (https://sdkman.io)
-2. Maven
+2. Maven or Gradle
 3. Docker
 4. Kubernetes
 5. Helm
-6. Gradle (the build is broken at the moment)
+
 
 Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). 
 
