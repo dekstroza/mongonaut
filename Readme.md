@@ -17,12 +17,13 @@ Compiles to native image.
 
 Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). 
 
-Following instructinos assume using k8s on Docker for Mac/Windows (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
-By default ./mvnw clean install will also create docker image with Graal
+The instructions assume k8s on Docker for Mac/Windows (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
+By default ```./mvnw clean``` install will also create docker image with Graal
 compiled binary inside, using provided Dockerfile. 
 
 ## Building
-
+Code can be built with either maven or gradle, both rely on their respective wrapper.
+### Maven Build
 Build is performed with spotify's dockerfile maven plugin. To skip Graal build, run `/mvnw -Ddockerfile.skip clean install` which will build only the jar.
 To build the code run, this will build the code and create docker image with
 Graal binary inside.
@@ -30,6 +31,9 @@ Graal binary inside.
 ```
 ./mvnw clean install # or just mvn clean install
 ```
+
+### Gradle Build
+To build with gradle run ```./gradlew build``` which will build the code and execute the test cases. To build the Docker image and compile with graal, run ```./gradlew dockerImg``` which will build the Docker image with graal compiled binary.
 
 ## Trying out the service
 
