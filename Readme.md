@@ -4,7 +4,7 @@
 ## Description
 
 Micronaut and Graal example service using mongodb as the datastore.
-Compiles to native image.
+Compiles to native image. Helm chart provided will deploy the built code together with prometheus, grafana, and jaeger demonstrating telemetry gathering out of the box, together with jaeger tracing and openapi. Grafana is preloaded with demo dashboard as an example.
 
 ## Requirements
 
@@ -23,6 +23,7 @@ compiled binary inside, using provided Dockerfile.
 
 ## Building
 Code can be built with either maven or gradle, both rely on their respective wrapper.
+
 ### Maven Build
 Build is performed with spotify's dockerfile maven plugin. To skip Graal build, run `/mvnw -Ddockerfile.skip clean install` which will build only the jar.
 To build the code run, this will build the code and create docker image with
@@ -102,6 +103,14 @@ Grafana is available on http://localhost:876/ username is admin and password can
 ```
 kubectl get secret --namespace default precise-ragdoll-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-Jaeger UI is on: localhost:80
+```
+Demo dashboard is provided with the Grafana, providing some basic telemetry on cpu, mem and api calls.
+```
+```
+Jaeger UI is on: localhost:80 and shows some useless (in this example) spans, provided more as illustration how to do it.
+```
+```
+Openapi definition can be accessed at: http://localhost:7777/swagger/micronaut-service-1.0.0.yml
+```
 
 Happy hacking...
