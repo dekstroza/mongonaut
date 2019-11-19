@@ -18,7 +18,7 @@ Compiles to native image.
 Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). 
 
 The instructions assume k8s on Docker for Mac/Windows (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
-By default ```./mvnw clean``` install will also create docker image with Graal
+By default ```./mvnw clean install``` will also create docker image with Graal
 compiled binary inside, using provided Dockerfile. 
 
 ## Building
