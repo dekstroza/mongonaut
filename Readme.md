@@ -36,6 +36,14 @@ Graal binary inside.
 ### Gradle Build
 To build with gradle run ```./gradlew build``` which will build the code and execute the test cases. To build the Docker image and compile with graal, run ```./gradlew dockerImg``` which will build the Docker image with graal compiled binary.
 
+```
+./gradlew build # to build and run the tests
+```
+or
+```
+./gradlew dockerImg # to build the code and create graal docker image
+```
+
 ## Trying out the service
 
 Service can be deployed using provided helm charts in k8s directory with
@@ -99,10 +107,7 @@ curl -w "@curl-format.txt" -o /dev/null -s -X POST localhost:7777/mongonaut/alar
 # Save several alarms
 for i in {10..20}; do curl -X POST localhost:7777/mongonaut/alarms -d "{\"id\": $i,\"name\": \"Second Alarm\", \"severity\": \"MEDIUM\"}" -H 'Content-Type:application/json'; done
 ```
-Grafana is available on http://localhost:876/ username is admin and password can be obtained using:
-```
-kubectl get secret --namespace default precise-ragdoll-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-```
+Grafana is available on http://localhost:876/ username is admin and the password can be obtained following instructions printed after deploying helm chart.
 ```
 Demo dashboard is provided with the Grafana, providing some basic telemetry on cpu, mem and api calls.
 ```
