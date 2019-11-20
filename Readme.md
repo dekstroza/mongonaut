@@ -36,6 +36,14 @@ Graal binary inside.
 ### Gradle Build
 To build with gradle run ```./gradlew build``` which will build the code and execute the test cases. To build the Docker image and compile with graal, run ```./gradlew dockerImg``` which will build the Docker image with graal compiled binary.
 
+```
+./gradlew build # to build and run the tests
+```
+or
+```
+./gradlew dockerImg # to build the code and create graal docker image
+```
+
 ## Trying out the service
 
 Service can be deployed using provided helm charts in k8s directory with
