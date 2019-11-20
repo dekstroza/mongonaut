@@ -6,6 +6,9 @@ items:
   metadata:
     name: jaeger
     labels:
+      helm.sh/chart: {{ include "mongonaut.chart" .  }}
+      app.kubernetes.io/instance: {{ .Release.Name  }}
+      app.kubernetes.io/managed-by: {{ .Release.Service  }}
       app: jaeger
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: all-in-one
@@ -19,6 +22,7 @@ items:
           app: jaeger
           app.kubernetes.io/name: jaeger
           app.kubernetes.io/component: all-in-one
+          app.kubernetes.io/instance: {{ .Release.Name  }}
         annotations:
           prometheus.io/scrape: "true"
           prometheus.io/port: "16686"
@@ -55,6 +59,9 @@ items:
       app: jaeger
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: query
+      helm.sh/chart: {{ include "mongonaut.chart" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
   spec:
     ports:
       - name: query-http
@@ -64,6 +71,7 @@ items:
     selector:
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: all-in-one
+      app.kubernetes.io/instance: {{ .Release.Name  }}
     type: LoadBalancer
 - apiVersion: v1
   kind: Service
@@ -73,6 +81,9 @@ items:
       app: jaeger
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: collector
+      helm.sh/chart: {{ include "mongonaut.chart" .  }}
+      app.kubernetes.io/instance: {{ .Release.Name  }}
+      app.kubernetes.io/managed-by: {{ .Release.Service  }}
   spec:
     ports:
     - name: jaeger-collector-tchannel
@@ -90,6 +101,7 @@ items:
     selector:
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: all-in-one
+      app.kubernetes.io/instance: {{ .Release.Name  }}
     type: ClusterIP
 - apiVersion: v1
   kind: Service
@@ -99,6 +111,9 @@ items:
       app: jaeger
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: agent
+      helm.sh/chart: {{ include "mongonaut.chart" .  }}
+      app.kubernetes.io/instance: {{ .Release.Name  }}
+      app.kubernetes.io/managed-by: {{ .Release.Service  }}
   spec:
     ports:
     - name: agent-zipkin-thrift
@@ -121,6 +136,7 @@ items:
     selector:
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: all-in-one
+      app.kubernetes.io/instance: {{ .Release.Name  }}
 - apiVersion: v1
   kind: Service
   metadata:
@@ -129,6 +145,9 @@ items:
       app: jaeger
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: zipkin
+      helm.sh/chart: {{ include "mongonaut.chart" .  }}
+      app.kubernetes.io/instance: {{ .Release.Name  }}
+      app.kubernetes.io/managed-by: {{ .Release.Service  }}
   spec:
     ports:
     - name: jaeger-collector-zipkin
@@ -139,4 +158,5 @@ items:
     selector:
       app.kubernetes.io/name: jaeger
       app.kubernetes.io/component: all-in-one
+      app.kubernetes.io/instance: {{ .Release.Name  }}
 
