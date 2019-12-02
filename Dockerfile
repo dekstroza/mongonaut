@@ -5,6 +5,7 @@ ADD ${BUILD_DIR}/${JAR_FILE} /home/app/mongonaut.jar
 WORKDIR /home/app
 RUN gu install native-image && \
     native-image --no-server \
+	--static \
     --initialize-at-run-time="io.micronaut.configuration.mongo.reactive.test.AbstractMongoProcessFactory, \
 	com.mongodb.UnixServerAddress,com.mongodb.internal.connection.SnappyCompressor, \
 	io.micronaut.tracing.brave.BraveTracerFactory, \
