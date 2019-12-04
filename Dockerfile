@@ -1,10 +1,9 @@
-FROM oracle/graalvm-ce:19.2.1 as graalvm
+FROM dekstroza/graalvm-ee as graalvm
 ARG JAR_FILE
 ARG BUILD_DIR
 ADD ${BUILD_DIR}/${JAR_FILE} /home/app/mongonaut.jar
 WORKDIR /home/app
-RUN gu install native-image && \
-    native-image --no-server \
+RUN native-image --no-server \
     --initialize-at-run-time="io.micronaut.configuration.mongo.reactive.test.AbstractMongoProcessFactory, \
 	com.mongodb.UnixServerAddress,com.mongodb.internal.connection.SnappyCompressor, \
 	io.micronaut.tracing.brave.BraveTracerFactory, \
@@ -17,6 +16,5 @@ RUN gu install native-image && \
 FROM frolvlad/alpine-glibc
 EXPOSE 8080
 COPY --from=graalvm /home/app/mongonaut .
-COPY --from=graalvm /opt/graalvm-ce-19.2.1/jre/lib/amd64/libsunec.so .
 ENTRYPOINT ["./mongonaut"]
 

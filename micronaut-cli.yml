@@ -1,5 +1,0 @@
-profile: service
-defaultPackage: io.dekstroza
----
-testFramework: junit
-sourceLanguage: java
