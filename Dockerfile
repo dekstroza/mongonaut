@@ -17,7 +17,8 @@ RUN gu install native-image && \
     --class-path /home/app/mongonaut.jar
 FROM frolvlad/alpine-glibc
 EXPOSE 8080
+RUN apk --update add zlib-dev
+ENV LIBRARY_PATH=/lib:/usr/lib
 COPY --from=graalvm /home/app/mongonaut .
-COPY --from=graalvm /opt/graalvm-ce-19.2.1/jre/lib/amd64/libsunec.so .
 ENTRYPOINT ["./mongonaut"]
 
