@@ -48,7 +48,11 @@ or
 
 Service can be deployed using provided helm charts in k8s directory with
 ```
+#if using helm v2
 helm install k8s/mongonaut
+
+#is using helm v3
+helm install --generate-name k8s/mongonaut
 ```
 This will deploy two instances of the service, mongodb, prometheus, grafana and jaeger-all-in-one (for demo purpose). It
 will also configure grafana to use prometheus as datasource, and automatically
