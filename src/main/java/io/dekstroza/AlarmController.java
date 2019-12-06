@@ -22,7 +22,7 @@ public interface AlarmController {
      *
      * @return Returns json array of all alarms in the database
      */
-    @Timed(value = "method.alarms.api.getall", percentiles = { 0.5, 0.95, 0.99 }, description = "Read all alarms api metric")
+    @Timed(value = "method.alarms.api.getall", percentiles = { 0.5, 0.95, 0.99 }, description = "Read all alarms api metric", histogram = true)
     @Get(value = "/alarms", produces = APPLICATION_JSON)
     @Version("1")
     Flowable<Alarm> getAll();
@@ -38,7 +38,7 @@ public interface AlarmController {
      *            Alarm severity
      * @return Persisted alarm as json object
      */
-    @Timed(value = "method.alarms.api.save", percentiles = { 0.5, 0.95, 0.99 }, description = "Insert alarm api metric")
+    @Timed(value = "method.alarms.api.save", percentiles = { 0.5, 0.95, 0.99 }, description = "Insert alarm api metric", histogram = true)
     @Post(value = "/alarms", produces = APPLICATION_JSON, consumes = APPLICATION_JSON)
     @NewSpan("mongonaut-service")
     @Version("1")

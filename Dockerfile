@@ -1,9 +1,10 @@
-FROM dekstroza/graalvm-ee as graalvm
+FROM dekstroza/graalvm-ee:19.2.1 as graalvm
 ARG JAR_FILE
 ARG BUILD_DIR
 ADD ${BUILD_DIR}/${JAR_FILE} /home/app/mongonaut.jar
 WORKDIR /home/app
 RUN native-image --no-server \
+	--no-fallback  \
     --initialize-at-run-time="io.micronaut.configuration.mongo.reactive.test.AbstractMongoProcessFactory, \
 	com.mongodb.UnixServerAddress,com.mongodb.internal.connection.SnappyCompressor, \
 	io.micronaut.tracing.brave.BraveTracerFactory, \
