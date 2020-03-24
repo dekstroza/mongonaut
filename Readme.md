@@ -1,4 +1,5 @@
 # Micronaut & GraalVM example
+![Java CI with Maven](https://github.com/dekstroza/mongonaut/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 
 ## Description
