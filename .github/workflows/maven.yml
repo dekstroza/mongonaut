@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@latest
+    - uses: actions/checkout@v2
     - name: Set up JDK 1.8
       uses: DeLaGuardo/setup-graalvm@3
       with:
