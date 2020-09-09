@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - image: jaegertracing/jaeger-agent:1.16
+        - image: jaegertracing/jaeger-agent
           name: {{ .Chart.Name }}-jaeger-agent
           ports:
           - containerPort: 5775
@@ -31,7 +31,7 @@ spec:
             protocol: UDP
           - containerPort: 5778
             protocol: TCP
-          args: ["--collector.host-port={{ .Values.jaeger.collector.host }}:{{ .Values.jaeger.collector.port }}"]
+          args: ["--reporter.type=grpc","--reporter.grpc.host-port={{ .Values.jaeger.collector.host }}:{{ .Values.jaeger.collector.port }}"]
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
