@@ -18,5 +18,6 @@ FROM frolvlad/alpine-glibc
 EXPOSE 8080
 COPY --from=graalvm /home/app/mongonaut .
 COPY --from=graalvm /opt/graalvm-ce-java8-20.2.0/jre/lib/amd64/libsunec.so .
+RUN apk add libstdc++
 ENTRYPOINT ["./mongonaut"]
 

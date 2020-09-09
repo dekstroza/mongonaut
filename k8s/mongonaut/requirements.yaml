@@ -1,10 +1,10 @@
 dependencies:
   - name: mongodb
-    version: 5.16.0
-    repository: "@stable"
+    version: 9.1.1
+    repository: "https://charts.bitnami.com/bitnami"
   - name: grafana
-    version: 3.0.1
-    repository: "@stable"
+    version: 5.6.2
+    repository: "https://grafana.github.io/helm-charts"
   - name: prometheus
-    version: 8.9.1
-    repository: "@stable"
+    version: 11.15.0
+    repository: "https://prometheus-community.github.io/helm-charts"
