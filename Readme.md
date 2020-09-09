@@ -112,7 +112,7 @@ curl -w "@curl-format.txt" -o /dev/null -s -X POST localhost:7777/mongonaut/alar
 # Save several alarms
 for i in {10..20}; do curl -X POST localhost:7777/mongonaut/alarms -d "{\"id\": $i,\"name\": \"Second Alarm\", \"severity\": \"MEDIUM\"}" -H 'Content-Type:application/json'; done
 ```
-Grafana is available on http://localhost:876/ username is admin and the password can be obtained following instructions printed after deploying helm chart.
+Grafana is available on http://localhost:8769/ username is admin and the password can be obtained following instructions printed after deploying helm chart.
 ```
 Demo dashboard is provided with the Grafana, providing some basic telemetry on cpu, mem and api calls.
 ```
