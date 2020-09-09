@@ -6,8 +6,8 @@
     <artifactId>mongonaut</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <properties>
-        <micronaut.version>1.2.6</micronaut.version>
-        <micronaut.openapi.version>1.2.2</micronaut.openapi.version>
+        <micronaut.version>2.0.1</micronaut.version>
+        <micronaut.openapi.version>2.1.0</micronaut.openapi.version>
         <jaeger.tracing.version>1.0.0</jaeger.tracing.version>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,12 +38,16 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+        <groupId>io.micronaut.configuration</groupId>
+        <artifactId>micronaut-openapi</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-server-netty</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.configuration</groupId>
+            <groupId>io.micronaut.mongodb</groupId>
             <artifactId>micronaut-mongo-reactive</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -58,9 +62,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.configuration</groupId>
+            <groupId>io.micronaut.micrometer</groupId>
             <artifactId>micronaut-micrometer-core</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
@@ -68,9 +71,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.configuration</groupId>
+            <groupId>io.micronaut.micrometer</groupId>
             <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
@@ -128,13 +130,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.4.0</version>
+            <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.4.0</version>
+            <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -149,7 +151,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -171,7 +173,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>3.0.0</version>
                 <configuration>
                     <executable>java</executable>
                     <arguments>
@@ -187,19 +189,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
+                <version>3.0.0-M5</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.jupiter</groupId>
                         <artifactId>junit-jupiter-engine</artifactId>
-                        <version>5.4.2</version>
+                        <version>5.6.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.10</version>
+                <version>1.4.13</version>
                 <executions>
                     <execution>
                         <id>default</id>
@@ -223,7 +225,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>3.8.1</version>
                     <configuration>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
@@ -245,7 +247,7 @@
                             <path>
                                 <groupId>io.micronaut.configuration</groupId>
                                 <artifactId>micronaut-openapi</artifactId>
-                                <version>${micronaut.openapi.version}</version>
+                                <version>1.5.2</version>
                             </path>
                             <path>
                                 <groupId>io.micronaut</groupId>
@@ -278,7 +280,7 @@
                                     <path>
                                         <groupId>io.micronaut.configuration</groupId>
                                         <artifactId>micronaut-openapi</artifactId>
-                                        <version>${micronaut.openapi.version}</version>
+                                        <version>1.5.2</version>
                                     </path>
                                     <path>
                                         <groupId>io.micronaut</groupId>
