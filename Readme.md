@@ -30,6 +30,16 @@ Build is performed with spotify's dockerfile maven plugin. To skip Graal build, 
 To build the code run, this will build the code and create docker image with
 Graal binary inside.
 
+In order to build statically linked native images, we need to add support for libmuslc to the oracle's builder image. To do this run:
+
+```
+cd builder-image
+./build.sh
+```
+This will build the helper image, used later when the project is compiled and packaged into its docker container. Alternatively, the helper image can be pulled from my docker repository.
+
+Once the helper image is build, you can build the code with:
+
 ```
 ./mvnw clean install # or just mvn clean install
 ```
