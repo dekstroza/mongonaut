@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
     {
@@ -24,13 +23,21 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 6,
       "legend": {
         "avg": false,
@@ -47,26 +54,30 @@
       "nullPointMode": "null",
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container_name=\"mongonaut\"}[5m])) by (container_name, pod_name)",
+          "expr": "max(container_spec_cpu_shares{container!~\".*POD.*\", container=~\".*mongonaut.*\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{pod_name}}-{{container_name}}",
-          "refId": "A"
+          "legendFormat": "max cpu",
+          "refId": "B"
         },
         {
-          "expr": "container_spec_cpu_shares{container_name!~\".*POD.*\", container_name=~\".*mongonaut.*\"}",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{container=\"mongonaut\"}[5m])) by (container, pod)",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "max cpu {{pod_name}}-{{container_name}}",
-          "refId": "B"
+          "legendFormat": "{{pod}}-{{container}}",
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -116,13 +127,21 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 2,
       "legend": {
         "avg": false,
@@ -139,26 +158,31 @@
       "nullPointMode": "null",
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{name=~\".*mongonaut.*\", name!~\".*POD.*\"}) by (pod_name) ",
+          "expr": "sum(container_memory_working_set_bytes{name=~\".*k8s_mongonaut_mongonaut.*\", name!~\".*POD.*\"}) by (pod) ",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod_name}}",
           "refId": "A"
         },
         {
-          "expr": "container_spec_memory_limit_bytes{container_name!~\".*POD.*\", container_name=~\".*mongonaut.*\"}",
+          "expr": "max(container_spec_memory_limit_bytes{container=\"mongonaut\"})",
           "format": "time_series",
+          "hide": true,
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "max memory {{pod_name}}",
+          "legendFormat": "max memory",
           "refId": "B"
         }
       ],
@@ -209,13 +233,21 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 8,
       "legend": {
         "avg": false,
@@ -232,10 +264,12 @@
       "nullPointMode": "null",
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -301,13 +335,21 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 4,
       "legend": {
         "avg": false,
@@ -324,16 +366,19 @@
       "nullPointMode": "null",
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
           "expr": "sum(container_memory_working_set_bytes{container_name=\"mongonaut\"}) by (container_name) / sum(label_join(kube_pod_container_resource_limits_memory_bytes,\"container_name\", \"\", \"container\")) by (container_name)",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{container_name}}",
           "refId": "A"
@@ -386,13 +431,21 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 16
       },
+      "hiddenSeries": false,
       "id": 10,
       "legend": {
         "avg": false,
@@ -409,10 +462,12 @@
       "nullPointMode": "null",
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -474,7 +529,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 18,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -512,5 +567,5 @@
   "timezone": "",
   "title": "Mongonaut Dashboard",
   "uid": "Ha1ZYe6ik",
-  "version": 11
+  "version": 1
 }

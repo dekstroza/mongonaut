@@ -31,13 +31,13 @@ spec:
             protocol: UDP
           - containerPort: 5778
             protocol: TCP
-          args: ["--collector.host-port={{ .Values.jaeger.collector.host }}:{{ .Values.jaeger.collector.port }}"]
+          args: ["--reporter.type=grpc","--reporter.grpc.host-port={{ .Values.jaeger.collector.host }}:{{ .Values.jaeger.collector.port }}"]
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: MONGODB_URI
-              value: mongodb://{{ .Values.mongodb.mongodbUsername }}:{{ .Values.mongodb.mongodbPassword }}@{{ .Release.Name }}-mongodb:27017/{{ .Values.mongodb.mongodbDatabase }}
+              value: mongodb://{{ .Values.mongodb.auth.username }}:{{ .Values.mongodb.auth.password }}@{{ .Release.Name }}-mongodb:27017/{{ .Values.mongodb.auth.database }}
             - name: JAEGER_AGENT_HOST
               value: {{ .Values.jaeger.agent.host }}
             - name: JAEGER_AGENT_PORT

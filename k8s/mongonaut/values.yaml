@@ -52,12 +52,13 @@ jaeger:
     port: 5775
   collector:
     host: jaeger-collector
-    port: 14267
+    port: 14250
 mongodb:
-  mongodbRootPassword: mongonaut1234
-  mongodbUsername: mongonaut
-  mongodbPassword: mongonaut1234
-  mongodbDatabase: mongonaut
+  auth:
+    rootPassword: mongonaut1234
+    username: mongonaut
+    password: mongonaut1234
+    database: mongonaut
   persistence:
     enabled: false
   metrics:
