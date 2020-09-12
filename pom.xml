@@ -9,7 +9,7 @@
         <micronaut.version>2.0.1</micronaut.version>
         <micronaut.openapi.version>2.1.0</micronaut.openapi.version>
         <jaeger.tracing.version>1.0.0</jaeger.tracing.version>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>io.dekstroza.Application</exec.mainClass>
         <docker.repo>dekstroza</docker.repo>
@@ -172,7 +172,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>

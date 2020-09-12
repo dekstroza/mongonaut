@@ -1,11 +1,19 @@
-FROM oracle/graalvm-ce:20.2.0 as graalvm
+FROM dekstroza/graalvm-ce:20.2.0-r11-libmuslc as graalvm
 ARG JAR_FILE
 ARG BUILD_DIR
 ADD ${BUILD_DIR}/${JAR_FILE} /home/app/mongonaut.jar
 WORKDIR /home/app
-RUN gu install native-image && \
-    native-image --no-server \
+RUN native-image --no-server \
 	--static \
+	--libc=musl \
+	--enable-http \
+	--enable-https \
+	--no-fallback \
+    --enable-all-security-services \
+	-H:+StackTrace \
+    -H:+JNI \
+    -H:-SpawnIsolates \
+#    -H:-UseServiceLoaderFeature \
     --initialize-at-run-time="io.micronaut.configuration.mongo.reactive.test.AbstractMongoProcessFactory, \
 	com.mongodb.UnixServerAddress,com.mongodb.internal.connection.SnappyCompressor, \
 	io.micronaut.tracing.brave.BraveTracerFactory, \
@@ -15,10 +23,8 @@ RUN gu install native-image && \
 	io.micronaut.tracing.instrument.rxjava.RxJava1TracingInstrumentation" \
 	--initialize-at-build-time=io.micrometer.core,io.micrometer.prometheus,io.micrometer.shaded.org.pcollections \
     --class-path /home/app/mongonaut.jar
-FROM frolvlad/alpine-glibc
+FROM scratch
 EXPOSE 8080
-RUN apk --update add zlib-dev libstdc++
 COPY --from=graalvm /home/app/mongonaut .
-COPY --from=graalvm /opt/graalvm-ce-java8-20.2.0/jre/lib/amd64/libsunec.so .
 ENTRYPOINT ["./mongonaut"]
 
