@@ -68,7 +68,7 @@ Alternatively after deploying service with helm command above, more instances
 can be started with "normal" jvm for comparision examples, using the following commands:
 ```
 # Expose mongodb on loadbalancer
-SERVICE_NAME=$(kubectl get svc | grep mongodb | awk '{print $1}'); kubectl expose svc $SERVICE_NAME --name $SERVICE_NAME-balanced --type LoadBalancer --port 27017 --target-port 27017
+SERVICE_NAME=$(kubectl get svc | grep 'mongonaut\-[0-9]*\-mongodb ' | awk '{print $1}'); kubectl expose svc $SERVICE_NAME --name $SERVICE_NAME-balanced --type LoadBalancer --port 27017 --target-port 27017
 java -jar target/mongonaut-1.0.0-SNAPSHOT.jar
 ```
 This can be usefull to compare startup times, and pre and post jvm warmup performance differences.
