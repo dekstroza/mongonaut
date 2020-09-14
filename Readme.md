@@ -10,7 +10,7 @@ Compiles to native image. Helm chart provided will deploy the built code togethe
 ## Requirements
 
 1. Java with Graal, can be install with sdkman (https://sdkman.io)
-2. Maven or Gradle
+2. Maven
 3. Docker
 4. Kubernetes
 5. Helm
@@ -23,26 +23,25 @@ By default ```./mvnw clean install``` will also create docker image with Graal
 compiled binary inside, using provided Dockerfile. 
 
 ## Building
-Code can be built with either maven or gradle, both rely on their respective wrapper.
+Code can be built with maven.
 
 ### Maven Build
 Build is performed with spotify's dockerfile maven plugin. To skip Graal build, run `/mvnw -Ddockerfile.skip clean install` which will build only the jar.
 To build the code run, this will build the code and create docker image with
 Graal binary inside.
 
+In order to build statically linked native images, we need to add support for libmuslc to the oracle's builder image. To do this run:
+
+```
+cd builder-image
+./build.sh
+```
+This will build the helper image, used later when the project is compiled and packaged into its docker container. Alternatively, the helper image can be pulled from my docker repository.
+
+Once the helper image is build, you can build the code with:
+
 ```
 ./mvnw clean install # or just mvn clean install
-```
-
-### Gradle Build
-To build with gradle run ```./gradlew build``` which will build the code and execute the test cases. To build the Docker image and compile with graal, run ```./gradlew dockerImg``` which will build the Docker image with graal compiled binary.
-
-```
-./gradlew build # to build and run the tests
-```
-or
-```
-./gradlew dockerImg # to build the code and create graal docker image
 ```
 
 ## Trying out the service
