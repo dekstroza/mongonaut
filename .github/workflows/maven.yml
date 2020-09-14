@@ -16,9 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - name: Set up JDK 11
       uses: DeLaGuardo/setup-graalvm@3
       with:
-        graalvm-version: '19.3.0.java8'
+        graalvm-version: '19.3.0.java11'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
