@@ -9,7 +9,7 @@
         <micronaut.version>2.0.1</micronaut.version>
         <micronaut.openapi.version>2.1.0</micronaut.openapi.version>
         <jaeger.tracing.version>1.0.0</jaeger.tracing.version>
-        <jdk.version>8</jdk.version>
+        <jdk.version>11</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>io.dekstroza.Application</exec.mainClass>
         <docker.repo>dekstroza</docker.repo>
