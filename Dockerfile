@@ -13,7 +13,6 @@ RUN native-image --no-server \
 	-H:+StackTrace \
     -H:+JNI \
     -H:-SpawnIsolates \
-#    -H:-UseServiceLoaderFeature \
     --initialize-at-run-time="io.micronaut.configuration.mongo.reactive.test.AbstractMongoProcessFactory, \
 	com.mongodb.UnixServerAddress,com.mongodb.internal.connection.SnappyCompressor, \
 	io.micronaut.tracing.brave.BraveTracerFactory, \
