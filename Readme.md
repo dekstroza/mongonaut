@@ -23,7 +23,7 @@ By default ```./mvnw clean install``` will also create docker image with Graal
 compiled binary inside, using provided Dockerfile. 
 
 ## Building
-Code can be built with maven.
+Code can be built with maven, and selection of dynamically or statically linked image is done with maven property -Dstatic. If the property is ommited, by default image will be built with dynamic linking.
 
 ### Maven Build
 Build is performed with spotify's dockerfile maven plugin. To skip Graal build, run `/mvnw -Ddockerfile.skip clean install` which will build only the jar.
@@ -41,7 +41,12 @@ This will build the helper image, used later when the project is compiled and pa
 Once the helper image is build, you can build the code with:
 
 ```
-./mvnw clean install # or just mvn clean install
+./mvnw clean install # or just mvn clean install to build dynamically linked image
+```
+or
+
+```
+./mvwn clean install -Dstatic # to build statically linked image
 ```
 
 ## Trying out the service
