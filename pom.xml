@@ -20,6 +20,32 @@
         <exec.mainClass>io.dekstroza.Application</exec.mainClass>
         <docker.repo>dekstroza</docker.repo>
     </properties>
+    <profiles>
+        <profile>
+            <id>dynamic-linking</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!static</name>
+                </property>
+            </activation>
+            <properties>
+                <docker.file>Dockerfile.dynamic.linking</docker.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>static-linking</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>static</name>
+                </property>
+            </activation>
+            <properties>
+                <docker.file>Dockerfile.static.linking</docker.file>
+            </properties>
+        </profile>
+    </profiles>
     <repositories>
         <repository>
             <id>jcenter.bintray.com</id>
@@ -244,6 +270,7 @@
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                         <BUILD_DIR>target</BUILD_DIR>
                     </buildArgs>
+		    <dockerfile>${docker.file}</dockerfile>
                 </configuration>
             </plugin>
         </plugins>
