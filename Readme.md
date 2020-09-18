@@ -6,6 +6,8 @@
 
 Micronaut and Graal example service using mongodb as the datastore.
 Compiles to native image, supports both statically or dynamically linked native image. Helm chart provided will deploy the built code together with prometheus, grafana, and jaeger demonstrating telemetry gathering out of the box, together with jaeger tracing and openapi. Grafana is preloaded with demo dashboard as an example.
+It is demonstrating microservice exposing versioned api together with openapi, using mongo as it's datastore with reactive, exposing prometheus metrics, and tracing with jaeger, deployed with helm charts along with the customised grafana dashboard.
+
 
 ## Requirements
 
