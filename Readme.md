@@ -18,35 +18,23 @@ Features demonstrated are: compilation to native image (with static linking) rea
 5. Helm
 
 
-Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). 
-
-The instructions assume k8s on Docker for Mac/Windows (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
-By default ```./mvnw clean install``` will also create docker image with Graal
-compiled binary inside, using provided Dockerfile. 
+Easiest way to run this demo is to install sdkman, and using it install java (graal, latest) and micronaut (latest). The instructions assume k8s on Docker for Mac/Windows (k8s installed with docker itself). This makes exposing services through LoadBalancer easy, as they are exposed on localhost.
 
 ## Building
 Code can be built with maven, and selection of dynamically or statically linked image is done with maven property -Dstatic. If the property is ommited, by default image will be built with dynamic linking.
 
-### Maven Build
 Build is performed with spotify's dockerfile maven plugin. To skip Graal build, run `/mvnw -Ddockerfile.skip clean install` which will build only the jar.
-To build the code run, this will build the code and create docker image with
-Graal binary inside.
+By default, ```./mvnw clean install ``` will build graalvm based image and use dynamic linking when creating native binary, for details see **Dockerfile.dynamic.linking** located in the root directory of the project.
 
-In order to build statically linked native images, we need to add support for libmuslc to the oracle's builder image. To do this run:
-
+In order to build statically linked native images, we need extra step first: we need to add support for libmuslc to the oracle's builder image. 
+To do this run:
 ```
 cd builder-image
 ./build.sh
 ```
-This will build the helper image, used later when the project is compiled and packaged into its docker container. Alternatively, the helper image can be pulled from my docker repository.
+This will build the helper image, used later when the project is compiled and packaged into its docker container. Alternatively, the helper image will be pulled from my docker repository located here ```dekstroza/graalvm-ce:20.2.0-r11-libmuslc```.
 
-Once the helper image is build, you can build the code with:
-
-```
-./mvnw clean install # or just mvn clean install to build dynamically linked image
-```
-or
-
+Once the helper image is build (or you decided you dont want to build it and wnat to use the one from my repo), you can run the command bellow which will build statically linked native image **(for details see Dockerfile.static.linking)**:
 ```
 ./mvwn clean install -Dstatic # to build statically linked image
 ```
