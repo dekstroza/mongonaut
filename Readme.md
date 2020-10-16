@@ -5,7 +5,7 @@
 ## Description
 
 Micronaut and Graal example service using mongodb as the datastore compiled into statically or dynamically linked native image.
-This is a slightly more comprehensive hello world type of a microservice built with micronaut, using mongodb used as its data store. It can be compiled as tradidtional java application and packaged into docker container as runnable jar, or as graalvm compiled native binary (both statically and dynamically linked) and packaged into docker container.
+This is a slightly more comprehensive hello world type of a microservice built with micronaut, using mongodb as its data store. It can be compiled as tradidtional java application and packaged into docker container as runnable jar, or as graalvm compiled native binary (both statically and dynamically linked) and packaged into docker container.
 
 Features demonstrated are: compilation to native image (with static linking) reactive access to mongodb, versioned api, jaeger based tracing, prometheus metric and open-api. Helm chart provided will deploy built docker image along with mongodb, prometheus and all-in-one jaeger demonstrating all of the bespoke features. There is also a demo grafana dashboard provided with the helm chart, which will be installed into grafana upon chart deployment.
 
